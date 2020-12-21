@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
+//        write code here
         getMenuInflater().inflate(R.menu.menu_items, menu);
 
         return true;
