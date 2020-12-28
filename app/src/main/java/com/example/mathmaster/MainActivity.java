@@ -1,55 +1,28 @@
 package com.example.mathmaster;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.os.Handler;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private static int SPLASHtimeOUT = 4000;  //4 SECOND
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //write code here
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_items, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.sound:
-                Toast.makeText(this, "sound clicked", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.theme:
-                Toast.makeText(this, "theme clicked", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.sharing:
-                Toast.makeText(this, "sharing clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.rating:
-                Toast.makeText(this, "rating clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.about:
-                Toast.makeText(this, "about clicked", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-
-        return true;
+        //We can use splash screen in your first loading Activity like this:
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent hTntent;
+                hTntent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(hTntent);
+                finish();
+            }
+        }, SPLASHtimeOUT);
     }
 }
