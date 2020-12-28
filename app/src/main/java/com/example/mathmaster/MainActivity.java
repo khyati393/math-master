@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    settings settings = new settings(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.sharing:
-                Toast.makeText(this, "sharing clicked", Toast.LENGTH_SHORT).show();
+                if (item.getItemId() == R.id.sharing)
+                    settings.share();
                 break;
+
             case R.id.rating:
-                Toast.makeText(this, "rating clicked", Toast.LENGTH_SHORT).show();
+                if (item.getItemId() == R.id.rating)
+                    settings.rate();
+
                 break;
             case R.id.about:
                 Toast.makeText(this, "about clicked", Toast.LENGTH_SHORT).show();
