@@ -8,14 +8,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class KJActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     settings settings = new settings(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_kj);
+        setContentView(R.layout.activity_home);
 
     }
 
