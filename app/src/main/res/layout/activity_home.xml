@@ -12,13 +12,15 @@
         android:text="MATH MASTER"
         android:textSize="40sp" />
 
-    <Button
+    <Spinner
+        android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="72dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
+        android:spinnerMode="dialog"
         android:text="Choose"
         android:textSize="20sp" />
 
