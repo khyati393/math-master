@@ -1,0 +1,117 @@
+package com.example.mathmaster;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AdditionActivity extends AppCompatActivity {
+    int value1;
+    int value2;
+    int score = 0;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_addition);
+
+        button = (Button) findViewById(R.id.b1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Right();
+            }
+        });
+        button = (Button) findViewById(R.id.b2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Wrong();
+            }
+        });
+        setNewNumbers();
+
+    }
+
+    public void Right() {
+        TextView Attempt = findViewById(R.id.attempt);
+        int userAnswer = Integer.parseInt(Attempt.getText().toString());
+        int sum = value1 + value2;
+        if (userAnswer == sum) {
+            score++;
+            setNewNumbers();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
+            builder.setTitle("Game Over!")
+                    .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    AdditionActivity.super.onBackPressed();
+                }
+            })
+                    .setNegativeButton("Play Again", null).setCancelable(false);
+            setNewNumbers();
+            score = 0;
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+
+
+    }
+
+    private void setNewNumbers() {
+
+        int random;
+        value1 = random = (int) ((Math.random() * 19) + 1);
+        value2 = random = (int) ((Math.random() * 19) + 1);
+        int k = random = (int) ((Math.random() * 2) + 1);
+        int j = random = (int) ((Math.random() * 39) + 1);
+        TextView Number1 = findViewById(R.id.num1);
+        Number1.setText("" + value1);
+        TextView Number2 = findViewById(R.id.num2);
+        Number2.setText("" + value2);
+        TextView Attempt = findViewById(R.id.attempt);
+        int sum = value1 + value2;
+        if (k == 2)
+            Attempt.setText("" + sum);
+        else Attempt.setText("" + j);
+
+    }
+
+
+    public void Wrong() {
+        TextView Attempt = findViewById(R.id.attempt);
+        int userAnswer = Integer.parseInt(Attempt.getText().toString());
+        int sum = value1 + value2;
+        if (userAnswer != sum) {
+            score++;
+            setNewNumbers();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
+            builder.setTitle("Game Over!")
+                    .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    AdditionActivity.super.onBackPressed();
+                }
+            })
+                    .setNegativeButton("Play Again", null).setCancelable(false);
+            setNewNumbers();
+            score = 0;
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+    }
+
+}
+
+

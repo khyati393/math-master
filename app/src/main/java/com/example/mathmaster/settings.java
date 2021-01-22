@@ -2,7 +2,6 @@ package com.example.mathmaster;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 public class settings {
 
@@ -17,9 +16,8 @@ public class settings {
     }
 
     public void rate() {
-        Intent rate = new Intent(Intent.ACTION_VIEW);
-        rate.setData(Uri.parse("market://details?id=" + "math master"));
-        context.startActivity(rate);
+        Intent r = new Intent(context.getApplicationContext(), RatingActivity.class);
+        context.startActivity(r);
     }
 
     public void share() {

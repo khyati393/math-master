@@ -1,12 +1,14 @@
 package com.example.mathmaster;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,12 +22,21 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
     Spinner spinner;
     settings settings = new settings(this);
+    int positionList;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        button = (Button) findViewById(R.id.btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextPage();
+            }
+        });
         initializeViewsAndListeners();
 
     }
@@ -103,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void userSelectionSpinnerSetup() {
+    private int userSelectionSpinnerSetup() {
 
         // for drop down
         spinner = (Spinner) findViewById(R.id.spinner1);
@@ -130,9 +141,10 @@ public class HomeActivity extends AppCompatActivity {
                 view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                 if (parent.getItemAtPosition(position).equals("Choose")) {
-                    //do nothing
+                    positionList = position;
                 } else {
                     Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
+                    positionList = position;
                 }
 
             }
@@ -142,7 +154,34 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        return positionList;
+    }
 
+    public void nextPage() {
+        if (positionList == 0) {
+            //do nothing
+        } else
+            switch (positionList) {
+
+                case 1:
+                    Intent i1 = new Intent(getApplicationContext(), AdditionActivity.class);
+                    startActivity(i1);
+                    break;
+                case 2:
+                    Intent i2 = new Intent(getApplicationContext(), SubtractionActivity.class);
+                    startActivity(i2);
+                    break;
+
+                case 3:
+                    Intent i3 = new Intent(getApplicationContext(), MultiplicationActivity.class);
+                    startActivity(i3);
+                    break;
+
+                case 4:
+                    Intent i4 = new Intent(getApplicationContext(), DivisionActivity.class);
+                    startActivity(i4);
+                    break;
+            }
     }
 
 }
