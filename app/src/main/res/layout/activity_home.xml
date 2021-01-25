@@ -39,6 +39,7 @@
         android:paddingEnd="64dp"
         android:paddingBottom="32dp"
         android:text="Play"
+        android:background="#7CC9EC"
         android:fontFamily="cursive"
         android:textSize="20sp" />
 
