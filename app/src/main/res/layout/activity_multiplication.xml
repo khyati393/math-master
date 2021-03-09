@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MultiplicationActivity">
+    tools:context=".MultiplicationActivity"
+    android:background="@drawable/backgroundmult">
 
     <LinearLayout
         android:layout_width="match_parent"

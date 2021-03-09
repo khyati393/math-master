@@ -1,6 +1,7 @@
 package com.example.mathmaster;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,15 @@ public class DivisionActivity extends AppCompatActivity {
     int score = 0;
     int temp;
     Button button;
+    MediaPlayer mediaPlayer,mediaPlayer1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_division);
 
+        mediaPlayer=MediaPlayer.create(this,R.raw.right);
+        mediaPlayer1 =MediaPlayer.create(this,R.raw.wrong);
         button=(Button)findViewById(R.id.b1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,9 +47,11 @@ public class DivisionActivity extends AppCompatActivity {
         int div = value1 / value2;
         if (userAnswer == div) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
             temp=1;
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(DivisionActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
@@ -90,9 +97,11 @@ public class DivisionActivity extends AppCompatActivity {
         int div = value1 / value2;
         if (userAnswer != div) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
                temp=1;
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(DivisionActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {

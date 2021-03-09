@@ -1,6 +1,7 @@
 package com.example.mathmaster;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +15,15 @@ public class AdditionActivity extends AppCompatActivity {
     int value2;
     int score = 0;
     Button button;
+    MediaPlayer mediaPlayer, mediaPlayer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.right);
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.wrong);
         button = (Button) findViewById(R.id.b1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +48,10 @@ public class AdditionActivity extends AppCompatActivity {
         int sum = value1 + value2;
         if (userAnswer == sum) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
@@ -69,8 +75,8 @@ public class AdditionActivity extends AppCompatActivity {
     private void setNewNumbers() {
 
         int random;
-        value1 = random = (int) ((Math.random() * 19) + 1);
-        value2 = random = (int) ((Math.random() * 19) + 1);
+        value1 = random = (int) ((Math.random() * 9) + 1);
+        value2 = random = (int) ((Math.random() * 9) + 1);
         int k = random = (int) ((Math.random() * 2) + 1);
         int j = random = (int) ((Math.random() * 39) + 1);
         TextView Number1 = findViewById(R.id.num1);
@@ -92,8 +98,10 @@ public class AdditionActivity extends AppCompatActivity {
         int sum = value1 + value2;
         if (userAnswer != sum) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {

@@ -3,6 +3,7 @@ package com.example.mathmaster;
 //import android.support.v7.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +18,15 @@ public class MultiplicationActivity extends AppCompatActivity {
     int value2;
     int score = 0;
     Button button;
+    MediaPlayer mediaPlayer, mediaPlayer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplication);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.right);
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.wrong);
         button = (Button) findViewById(R.id.b1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +50,11 @@ public class MultiplicationActivity extends AppCompatActivity {
         int mult = value1 * value2;
         if (userAnswer == mult) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
 
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(MultiplicationActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
@@ -93,8 +99,10 @@ public class MultiplicationActivity extends AppCompatActivity {
         int mult = value1 * value2;
         if (userAnswer != mult) {
             score++;
+            mediaPlayer.start();
             setNewNumbers();
         } else {
+            mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(MultiplicationActivity.this);
             builder.setTitle("Game Over!")
                     .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
