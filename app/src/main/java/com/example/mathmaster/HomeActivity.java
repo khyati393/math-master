@@ -16,22 +16,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.example.mathmaster.databinding.ActivityHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
     Spinner spinner;
     settings settings = new settings(this);
     int positionList;
     Button button;
+    private ActivityHomeBinding mBinding;
+    public static NoteRoomDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
 
-        final MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.play);
+        mDatabase = NoteRoomDatabase.getDatabase(getApplication());
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.play);
         button = (Button) findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +120,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void initializeViewsAndListeners() {
+
+        mBinding.buttonStreakList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(CourseRatingAndFeedbackActivity.getStartIntent(getBaseContext()));
+            }
+        });
 
         userSelectionSpinnerSetup();
 

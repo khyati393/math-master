@@ -9,13 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DivisionActivity"
-            android:theme="@style/AppThemeNO"/>
-        <activity android:name=".MultiplicationActivity"
-            android:theme="@style/AppThemeNO"/>
-        <activity android:name=".SubtractionActivity"
-            android:theme="@style/AppThemeNO"/>
-        <activity android:name=".SplashActivity"
+
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/AppThemeNO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +19,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".DivisionActivity"
+            android:theme="@style/AppThemeNO" />
+
+        <activity
+            android:name=".MultiplicationActivity"
+            android:theme="@style/AppThemeNO" />
+
+        <activity
+            android:name=".SubtractionActivity"
+            android:theme="@style/AppThemeNO" />
+
         <activity android:name=".HomeActivity" />
+
         <activity android:name=".MainActivity" />
-        <activity android:name=".AdditionActivity"
-            android:theme="@style/AppThemeNO"/>
+
+        <activity
+            android:name=".AdditionActivity"
+            android:theme="@style/AppThemeNO" />
+
         <activity android:name=".RatingActivity" />
+
+        <activity android:name=".CourseRatingAndFeedbackActivity" />
+
     </application>
 
 </manifest>

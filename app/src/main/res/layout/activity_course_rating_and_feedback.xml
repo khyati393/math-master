@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--Main content-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!--Average rating-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!--Stars-->
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratingBarAverage"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.1" />
+
+                <!--Rating-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewAverageRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textStyle="bold"
+                    tools:text="4.5" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--Ratings and feedback-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRatings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--No Result-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutNoResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewNoResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewNoResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="string_no_results_found"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--Progress Bar-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--Retry-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutRetry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonRetry"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="labelRetry"
+                android:textAllCaps="false" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
