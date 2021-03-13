@@ -5,6 +5,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <!--Main content-->
@@ -15,41 +16,13 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <!--Average rating-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <!--Stars-->
-                <androidx.appcompat.widget.AppCompatRatingBar
-                    android:id="@+id/ratingBarAverage"
-                    style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:rating="4.5"
-                    android:stepSize="0.1" />
-
-                <!--Rating-->
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewAverageRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textStyle="bold"
-                    tools:text="4.5" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <!--Ratings and feedback-->
+            <!--Streaks-->
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewRatings"
+                android:id="@+id/recyclerViewStreaks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never" />
+                android:overScrollMode="never"
+                tools:listitem="@layout/layout_streak_list_item" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
         mBinding.buttonStreakList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(CourseRatingAndFeedbackActivity.getStartIntent(getBaseContext()));
+                startActivity(StreakBoardActivity.getStartIntent(getBaseContext()));
             }
         });
 

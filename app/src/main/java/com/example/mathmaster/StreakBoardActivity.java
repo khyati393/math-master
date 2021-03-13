@@ -3,13 +3,11 @@ package com.example.mathmaster;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +17,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mathmaster.databinding.ActivityCourseRatingAndFeedbackBinding;
-import com.example.mathmaster.databinding.LayoutUserRatingFeedbackListItemBinding;
+import com.example.mathmaster.databinding.ActivityStreakBoardBinding;
+import com.example.mathmaster.databinding.LayoutStreakListItemBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import io.reactivex.Observable;
@@ -33,9 +34,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
+public class StreakBoardActivity extends AppCompatActivity {
 
-    private ActivityCourseRatingAndFeedbackBinding mBinding;
+    private ActivityStreakBoardBinding mBinding;
     private NoteDao mNoteDao;
     private ArrayList<NoteEntity> mNoteEntityList;
 
@@ -43,10 +44,10 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_course_rating_and_feedback);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_streak_board);
 
         mNoteDao = NoteRoomDatabase.getDatabase(getApplication()).noteDao();
-        mBinding.layoutMain.setVisibility(View.VISIBLE);
+
         setUpToolbar();
         handleIntent();
         getList();
@@ -68,7 +69,7 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
     }
 
     public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, CourseRatingAndFeedbackActivity.class);
+        Intent intent = new Intent(context, StreakBoardActivity.class);
         return intent;
     }
 
@@ -80,38 +81,38 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
 
     private void initializeRecyclerView(ArrayList<NoteEntity> list) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext(), RecyclerView.VERTICAL, false);
-        mBinding.recyclerViewRatings.setLayoutManager(layoutManager);
-        mBinding.recyclerViewRatings.setAdapter(new RatingsAndReviewsAdapter(list));
+        mBinding.recyclerViewStreaks.setLayoutManager(layoutManager);
+        mBinding.recyclerViewStreaks.setAdapter(new StreakListAdapter(list));
     }
 
 
-    private void getNotes() {
-        new GetNotesAsyncTask(mNoteDao).execute();
-    }
+//    private void getNotes() {
+//        new GetNotesAsyncTask(mNoteDao).execute();
+//    }
 
-    private class GetNotesAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        NoteDao mDao;
-
-        public GetNotesAsyncTask(NoteDao noteDao) {
-            mDao = noteDao;
-        }
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (mNoteEntityList != null && !mNoteEntityList.isEmpty()) {
-                initializeRecyclerView(mNoteEntityList);
-            }
-        }
-    }
+//    private class GetNotesAsyncTask extends AsyncTask<Void, Void, Void> {
+//
+//        NoteDao mDao;
+//
+//        public GetNotesAsyncTask(NoteDao noteDao) {
+//            mDao = noteDao;
+//        }
+//
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//            if (mNoteEntityList != null && !mNoteEntityList.isEmpty()) {
+//                initializeRecyclerView(mNoteEntityList);
+//            }
+//        }
+//    }
 
     @SuppressLint("CheckResult")
     private void getList() {
@@ -134,47 +135,59 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
                 .subscribe(new Consumer<ArrayList<NoteEntity>>() {
                     @Override
                     public void accept(ArrayList<NoteEntity> noteEntities) throws Exception {
-                        mNoteEntityList = noteEntities;
-                        initializeRecyclerView(mNoteEntityList);
+                        if (noteEntities != null && !noteEntities.isEmpty()) {
+                            mBinding.progressBar.setVisibility(View.GONE);
+                            mBinding.layoutRetry.setVisibility(View.GONE);
+                            mBinding.layoutNoResult.setVisibility(View.GONE);
+                            mBinding.layoutMain.setVisibility(View.VISIBLE);
+                            mNoteEntityList = noteEntities;
+                            initializeRecyclerView(mNoteEntityList);
+                        } else {
+                            noResultFound("You have not played yet");
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+                        noResultFound("Error");
+                        throwable.printStackTrace();
                     }
                 });
 
     }
 
-    private void noResultFound() {
+    private void noResultFound(String message) {
         mBinding.layoutMain.setVisibility(View.GONE);
         mBinding.progressBar.setVisibility(View.GONE);
         mBinding.layoutRetry.setVisibility(View.GONE);
 
         mBinding.layoutNoResult.setVisibility(View.VISIBLE);
-        mBinding.textViewNoResult.setText("NoRatingFeedbackFound");
+        mBinding.textViewNoResult.setText(message);
     }
 
 
-    private class RatingsAndReviewsAdapter extends RecyclerView.Adapter<RatingsAndReviewsAdapter.ViewHolder> {
+    private class StreakListAdapter extends RecyclerView.Adapter<StreakListAdapter.ViewHolder> {
         private ArrayList<NoteEntity> mList;
 
-        RatingsAndReviewsAdapter(ArrayList<NoteEntity> list) {
+        StreakListAdapter(ArrayList<NoteEntity> list) {
             mList = list;
         }
 
         @NonNull
         @Override
-        public RatingsAndReviewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutUserRatingFeedbackListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.layout_user_rating_feedback_list_item, parent, false);
-            return new RatingsAndReviewsAdapter.ViewHolder(binding);
+        public StreakListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutStreakListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.layout_streak_list_item, parent, false);
+            return new StreakListAdapter.ViewHolder(binding);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RatingsAndReviewsAdapter.ViewHolder holder, int position) {
-            NoteEntity ratingFeedback = mList.get(position);
+        public void onBindViewHolder(@NonNull StreakListAdapter.ViewHolder holder, int position) {
+            NoteEntity streakItem = mList.get(position);
 
-            setFeedback(ratingFeedback.getNote(), holder.mBinding.textViewUserFeedback);
+            setRanking(position, holder.mBinding.textViewRanking);
+            setComputationalType(streakItem.getComputationType(), holder.mBinding.textViewComputationType);
+            setStreakCount(streakItem.getStreak(), holder.mBinding.textViewStreak);
+            setStreakRecordedDate(streakItem.getStreakRecordedDateInMillis(), holder.mBinding.textViewStreakRecordedDate);
             if (position % 2 == 0) {
                 holder.mBinding.getRoot().setBackgroundColor(ContextCompat.getColor(getBaseContext(), android.R.color.white));
             } else {
@@ -183,10 +196,23 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
 
         }
 
+        private void setRanking(int position, AppCompatTextView textView) {
+            String str = String.valueOf(position + 1);
+            textView.setText(str + ".");
+        }
 
-        private void setFeedback(int feedback, AppCompatTextView textView) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(feedback + "");
+        private void setComputationalType(String computationType, AppCompatTextView textView) {
+            textView.setText(computationType);
+        }
+
+        private void setStreakCount(int streak, AppCompatTextView textView) {
+            textView.setText(String.valueOf(streak));
+        }
+
+        private void setStreakRecordedDate(long streakRecordedDateInMillis, AppCompatTextView textView) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String dateString = formatter.format(new Date(streakRecordedDateInMillis));
+            textView.setText(dateString);
         }
 
         @Override
@@ -195,9 +221,9 @@ public class CourseRatingAndFeedbackActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            LayoutUserRatingFeedbackListItemBinding mBinding;
+            LayoutStreakListItemBinding mBinding;
 
-            ViewHolder(LayoutUserRatingFeedbackListItemBinding binding) {
+            ViewHolder(LayoutStreakListItemBinding binding) {
                 super(binding.getRoot());
                 mBinding = binding;
             }

@@ -17,7 +17,8 @@ public interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(NoteEntity note);
 
-    @Query("SELECT * FROM notes")
+    //        @Query("SELECT * FROM notes")
+    @Query("SELECT * FROM notes ORDER BY streakCount DESC")
     List<NoteEntity> getAllNotes();
 
 }

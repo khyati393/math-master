@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!--Ranking-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="1." />
+
+        <!--Computation Type-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewComputationType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="Addition" />
+
+        <!--Streak-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewStreak"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="72" />
+
+        <!--Streak Recorded Date-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewStreakRecordedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="11 Mar 2021" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

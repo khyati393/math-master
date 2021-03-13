@@ -3,7 +3,6 @@ package com.example.mathmaster;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -65,9 +64,11 @@ public class AdditionActivity extends AppCompatActivity {
     }
 
     public void Right() {
+
         TextView Attempt = findViewById(R.id.attempt);
         int userAnswer = Integer.parseInt(Attempt.getText().toString());
         int sum = value1 + value2;
+
         if (userAnswer == sum) {
             score++;
             mediaPlayer.start();
@@ -76,21 +77,28 @@ public class AdditionActivity extends AppCompatActivity {
             mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
             builder.setTitle("Game Over!")
-                    .setMessage("your score " + score).setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    AdditionActivity.super.onBackPressed();
-                }
-            })
-                    .setNegativeButton("Play Again", null).setCancelable(false);
-            setNewNumbers();
-            score = 0;
+                    .setMessage("your score " + score)
+                    .setCancelable(false)
+                    .setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Play Again", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            dialog.dismiss();
+                        }
+                    });
+
 
             AlertDialog alert = builder.create();
             alert.show();
 
         }
-
 
     }
 
@@ -114,55 +122,53 @@ public class AdditionActivity extends AppCompatActivity {
     }
 
     public void Wrong() {
+
         TextView Attempt = findViewById(R.id.attempt);
         int userAnswer = Integer.parseInt(Attempt.getText().toString());
         int sum = value1 + value2;
+
         if (userAnswer != sum) {
             score++;
             mediaPlayer.start();
             setNewNumbers();
         } else {
+
             mediaPlayer1.start();
             AlertDialog.Builder builder = new AlertDialog.Builder(AdditionActivity.this);
             builder.setTitle("Game Over!")
                     .setCancelable(false)
                     .setMessage("your score = " + score)
                     .setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
+                        @SuppressLint("CheckResult")
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score));
-                            Log.e("insertNote---", "Go To Home - " + score);
+                        public void onClick(final DialogInterface dialog, int which) {
+                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
                             dialog.dismiss();
-                            AdditionActivity.super.onBackPressed();
                         }
                     })
                     .setNegativeButton("Play Again", new DialogInterface.OnClickListener() {
+                        @SuppressLint("CheckResult")
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score));
-                            Log.e("insertNote---", "Play Again - " + score);
-                            setNewNumbers();
-                            score = 0;
-                            dialogInterface.dismiss();
+                        public void onClick(final DialogInterface dialog, int i) {
+                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            dialog.dismiss();
                         }
-                    }).create().show();
+                    });
 
-//            AlertDialog alert = builder.create();
-//            alert.show();
-
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
     @SuppressLint("CheckResult")
-    private void insertNote(final NoteEntity note) {
+    private void insertNote(final NoteEntity note, final boolean isPlayAgain) {
 
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
 
                 long str = mNoteDao.insert(note);
-                Log.e("subscribe: ", mNoteDao + "");
-                Log.e("subscribe: ",  "It is printed");
+                Log.e("subscribe: ", mNoteDao + " It is printed");
                 if (!TextUtils.isEmpty(String.valueOf(str))) {
                     e.onNext(String.valueOf(str));
                 } else {
@@ -175,12 +181,28 @@ public class AdditionActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String success) throws Exception {
-                        Toast.makeText(getBaseContext(), "Success - " + success, Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getBaseContext(), "Success at insertion in addition - " + success, Toast.LENGTH_SHORT).show();
+                        Log.e("accept: ", "Success at insertion in addition - " + success);
+
+                        if (isPlayAgain) {
+                            Log.e("insertNote---", "Play Again - " + score);
+                            setNewNumbers();
+                            score = 0;
+                        } else {
+                            Log.e("insertNote---", "Go To Home - " + score);
+                            onBackPressed();
+                        }
+
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Error at insertion in addition", Toast.LENGTH_LONG).show();
+                        Log.e("accept: ", "Error at insertion in addition");
+                        throwable.printStackTrace();
+
                     }
                 });
 
@@ -191,20 +213,20 @@ public class AdditionActivity extends AppCompatActivity {
 //        new InsertAsyncTask(mNoteDao).execute(note);
 //    }
 
-    private class InsertAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
-
-        NoteDao mDao;
-
-        public InsertAsyncTask(NoteDao noteDao) {
-            mDao = noteDao;
-        }
-
-        @Override
-        protected Void doInBackground(NoteEntity... noteEntities) {
-//            mDao.insert(noteEntities[0]);
-            return null;
-        }
-    }
+//    private class InsertAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
+//
+//        NoteDao mDao;
+//
+//        public InsertAsyncTask(NoteDao noteDao) {
+//            mDao = noteDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(NoteEntity... noteEntities) {
+////            mDao.insert(noteEntities[0]);
+//            return null;
+//        }
+//    }
 
 
 }

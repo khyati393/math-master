@@ -12,7 +12,10 @@
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppThemeNO">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppThemeNO"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,27 +25,55 @@
 
         <activity
             android:name=".DivisionActivity"
-            android:theme="@style/AppThemeNO" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppThemeNO"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".MultiplicationActivity"
-            android:theme="@style/AppThemeNO" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppThemeNO"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".SubtractionActivity"
-            android:theme="@style/AppThemeNO" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppThemeNO"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".AdditionActivity"
-            android:theme="@style/AppThemeNO" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppThemeNO"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <activity android:name=".RatingActivity" />
+        <activity
+            android:name=".RatingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <activity android:name=".CourseRatingAndFeedbackActivity" />
+        <activity
+            android:name=".StreakBoardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
     </application>
 

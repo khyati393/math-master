@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
  * Created by Rajat Jain
  */
 
-//basically table name
+//basically table
 @Entity(tableName = "notes")
 public class NoteEntity {
 
@@ -19,12 +19,22 @@ public class NoteEntity {
     private String mId;
 
     @NonNull
-    @ColumnInfo(name = "note")
-    private int mNote;
+    @ColumnInfo(name = "streakCount")
+    private int mStreak;
 
-    public NoteEntity(@NonNull String id, @NonNull int note) {
+    @NonNull
+    @ColumnInfo(name = "computationType")
+    private String mComputationType;
+
+    @NonNull
+    @ColumnInfo(name = "StreakRecordedDate")
+    private long mStreakRecordedDateInMillis;
+
+    public NoteEntity(@NonNull String id, int streak, @NonNull String computationType, long streakRecordedDateInMillis) {
         mId = id;
-        mNote = note;
+        mStreak = streak;
+        mComputationType = computationType;
+        mStreakRecordedDateInMillis = streakRecordedDateInMillis;
     }
 
     @NonNull
@@ -33,12 +43,16 @@ public class NoteEntity {
     }
 
     @NonNull
-    public int getNote() {
-        return mNote;
+    public int getStreak() {
+        return mStreak;
     }
 
-    @Override
-    public String toString() {
-        return "NoteEntity{" + "mNote='" + mNote + '\'' + '}';
+    @NonNull
+    public String getComputationType() {
+        return mComputationType;
+    }
+
+    public long getStreakRecordedDateInMillis() {
+        return mStreakRecordedDateInMillis;
     }
 }
