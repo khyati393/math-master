@@ -27,4 +27,9 @@ public class settings {
         Intent.createChooser(share, "share app");
         context.startActivity(Intent.createChooser(share, "share using"));
     }
+    public void about()
+    {
+        Intent r1 = new Intent(context.getApplicationContext(), AboutActivity.class);
+        context.startActivity(r1);
+    }
 }

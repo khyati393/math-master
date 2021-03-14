@@ -4,30 +4,46 @@
     <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="@drawable/bground"
         android:gravity="center"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="welcome"
             android:fontFamily="serif"
-            android:text="MATH MASTER"
-            android:textColor="#000000"
-            android:textSize="40sp" />
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Math Master"
+            android:fontFamily="serif"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
 
         <Spinner
             android:id="@+id/spinner1"
+            android:popupBackground="#F3BE79"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="72dp"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp"
+            android:layout_marginTop="50dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:spinnerMode="dialog"
-            android:text="Choose"
+            android:text="--Choose--"
             android:textSize="20sp" />
 
         <Button
@@ -35,14 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="72dp"
-            android:background="#7CC9EC"
-            android:fontFamily="cursive"
-            android:paddingStart="64dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="64dp"
-            android:paddingBottom="32dp"
+            android:layout_marginTop="10dp"
             android:text="Play"
+            android:background="#F3BE79"
             android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
