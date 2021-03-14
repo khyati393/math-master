@@ -12,13 +12,14 @@ import java.util.List;
  */
 //write queries here
 @Dao
-public interface NoteDao {
+public interface StreakDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    long insert(NoteEntity note);
+    long insert(StreakEntity streakEntity);
 
-    //        @Query("SELECT * FROM notes")
-    @Query("SELECT * FROM notes ORDER BY streakCount DESC")
-    List<NoteEntity> getAllNotes();
+    // @Query("SELECT * FROM notes")
+    // @Query("SELECT * FROM notes where streakCount>0 ORDER BY streakCount DESC ")
+    @Query("SELECT * FROM streaks ORDER BY streakCount DESC")
+    List<StreakEntity> getAllStreaks();
 
 }

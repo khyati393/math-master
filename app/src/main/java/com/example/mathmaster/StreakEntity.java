@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey;
  */
 
 //basically table
-@Entity(tableName = "notes")
-public class NoteEntity {
+@Entity(tableName = "streaks")
+public class StreakEntity {
 
     @PrimaryKey
     @NonNull
@@ -30,7 +30,7 @@ public class NoteEntity {
     @ColumnInfo(name = "StreakRecordedDate")
     private long mStreakRecordedDateInMillis;
 
-    public NoteEntity(@NonNull String id, int streak, @NonNull String computationType, long streakRecordedDateInMillis) {
+    public StreakEntity(@NonNull String id, int streak, @NonNull String computationType, long streakRecordedDateInMillis) {
         mId = id;
         mStreak = streak;
         mComputationType = computationType;

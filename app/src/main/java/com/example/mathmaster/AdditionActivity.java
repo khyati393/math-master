@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,8 +30,7 @@ public class AdditionActivity extends AppCompatActivity {
     int score = 0;
     Button button;
     MediaPlayer mediaPlayer, mediaPlayer1;
-    //    public static NoteRoomDatabase mDatabase;
-    private NoteDao mNoteDao;
+    private StreakDao mStreakDao;
 
 
     @Override
@@ -58,8 +56,7 @@ public class AdditionActivity extends AppCompatActivity {
         });
         setNewNumbers();
 
-//        mDatabase = NoteRoomDatabase.getDatabase(getApplication());
-        mNoteDao = NoteRoomDatabase.getDatabase(getApplication()).noteDao();
+        mStreakDao = StreakRoomDatabase.getDatabase(getApplication()).streakDao();
 
     }
 
@@ -82,14 +79,20 @@ public class AdditionActivity extends AppCompatActivity {
                     .setPositiveButton("Go To Home", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
+                            if (score > 0) {
+                                insertStreakNote(new StreakEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
+                            } else {
+                                onBackPressed();
+                            }
                             dialog.dismiss();
                         }
                     })
                     .setNegativeButton("Play Again", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            if (score > 0) {
+                                insertStreakNote(new StreakEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            }
                             dialog.dismiss();
                         }
                     });
@@ -142,7 +145,11 @@ public class AdditionActivity extends AppCompatActivity {
                         @SuppressLint("CheckResult")
                         @Override
                         public void onClick(final DialogInterface dialog, int which) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
+                            if (score > 0) {
+                                insertStreakNote(new StreakEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), false);
+                            } else {
+                                onBackPressed();
+                            }
                             dialog.dismiss();
                         }
                     })
@@ -150,7 +157,9 @@ public class AdditionActivity extends AppCompatActivity {
                         @SuppressLint("CheckResult")
                         @Override
                         public void onClick(final DialogInterface dialog, int i) {
-                            insertNote(new NoteEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            if (score > 0) {
+                                insertStreakNote(new StreakEntity(UUID.randomUUID().toString(), score, "Addition", System.currentTimeMillis()), true);
+                            }
                             dialog.dismiss();
                         }
                     });
@@ -161,14 +170,13 @@ public class AdditionActivity extends AppCompatActivity {
     }
 
     @SuppressLint("CheckResult")
-    private void insertNote(final NoteEntity note, final boolean isPlayAgain) {
+    private void insertStreakNote(final StreakEntity streakEntity, final boolean isPlayAgain) {
 
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
 
-                long str = mNoteDao.insert(note);
-                Log.e("subscribe: ", mNoteDao + " It is printed");
+                long str = mStreakDao.insert(streakEntity);
                 if (!TextUtils.isEmpty(String.valueOf(str))) {
                     e.onNext(String.valueOf(str));
                 } else {
@@ -182,52 +190,23 @@ public class AdditionActivity extends AppCompatActivity {
                     @Override
                     public void accept(String success) throws Exception {
 
-                        Toast.makeText(getBaseContext(), "Success at insertion in addition - " + success, Toast.LENGTH_SHORT).show();
-                        Log.e("accept: ", "Success at insertion in addition - " + success);
-
                         if (isPlayAgain) {
-                            Log.e("insertNote---", "Play Again - " + score);
                             setNewNumbers();
                             score = 0;
                         } else {
-                            Log.e("insertNote---", "Go To Home - " + score);
                             onBackPressed();
                         }
-
 
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getBaseContext(), "Error at insertion in addition", Toast.LENGTH_LONG).show();
-                        Log.e("accept: ", "Error at insertion in addition");
+                        Toast.makeText(getBaseContext(), "Error with insertion in database at Addition", Toast.LENGTH_LONG).show();
                         throwable.printStackTrace();
-
                     }
                 });
 
     }
-
-
-//    private void insertNote(NoteEntity note) {
-//        new InsertAsyncTask(mNoteDao).execute(note);
-//    }
-
-//    private class InsertAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
-//
-//        NoteDao mDao;
-//
-//        public InsertAsyncTask(NoteDao noteDao) {
-//            mDao = noteDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(NoteEntity... noteEntities) {
-////            mDao.insert(noteEntities[0]);
-//            return null;
-//        }
-//    }
-
 
 }
 

@@ -30,14 +30,14 @@ public class HomeActivity extends AppCompatActivity {
     int positionList;
     Button button;
     private ActivityHomeBinding mBinding;
-    public static NoteRoomDatabase mDatabase;
+    public static StreakRoomDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
 
-        mDatabase = NoteRoomDatabase.getDatabase(getApplication());
+        mDatabase = StreakRoomDatabase.getDatabase(getApplication());
 
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.play);
         button = (Button) findViewById(R.id.btn);
@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private int userSelectionSpinnerSetup() {
+    private void userSelectionSpinnerSetup() {
 
         // for drop down
         spinner = (Spinner) findViewById(R.id.spinner1);
@@ -161,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (parent.getItemAtPosition(position).equals("Choose")) {
                     positionList = position;
                 } else {
-                    Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
                     positionList = position;
                 }
 
@@ -172,34 +172,39 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        return positionList;
+
     }
 
     public void nextPage() {
-        if (positionList == 0) {
-            //do nothing
-        } else
-            switch (positionList) {
 
-                case 1:
-                    Intent i1 = new Intent(getApplicationContext(), AdditionActivity.class);
-                    startActivity(i1);
-                    break;
-                case 2:
-                    Intent i2 = new Intent(getApplicationContext(), SubtractionActivity.class);
-                    startActivity(i2);
-                    break;
+        switch (positionList) {
 
-                case 3:
-                    Intent i3 = new Intent(getApplicationContext(), MultiplicationActivity.class);
-                    startActivity(i3);
-                    break;
+            case 0:
+            default:
+                Toast.makeText(getBaseContext(), "Please select an arithmetic operation to play", Toast.LENGTH_SHORT).show();
+                break;
 
-                case 4:
-                    Intent i4 = new Intent(getApplicationContext(), DivisionActivity.class);
-                    startActivity(i4);
-                    break;
-            }
+            case 1:
+                Intent i1 = new Intent(getApplicationContext(), AdditionActivity.class);
+                startActivity(i1);
+                break;
+
+            case 2:
+                Intent i2 = new Intent(getApplicationContext(), SubtractionActivity.class);
+                startActivity(i2);
+                break;
+
+            case 3:
+                Intent i3 = new Intent(getApplicationContext(), MultiplicationActivity.class);
+                startActivity(i3);
+                break;
+
+            case 4:
+                Intent i4 = new Intent(getApplicationContext(), DivisionActivity.class);
+                startActivity(i4);
+                break;
+
+        }
     }
 
 }

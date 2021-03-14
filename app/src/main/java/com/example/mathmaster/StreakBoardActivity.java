@@ -3,6 +3,7 @@ package com.example.mathmaster;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,8 +38,8 @@ import io.reactivex.schedulers.Schedulers;
 public class StreakBoardActivity extends AppCompatActivity {
 
     private ActivityStreakBoardBinding mBinding;
-    private NoteDao mNoteDao;
-    private ArrayList<NoteEntity> mNoteEntityList;
+    private StreakDao mStreakDao;
+    private ArrayList<StreakEntity> mStreakEntityList;
 
 
     @Override
@@ -46,10 +47,10 @@ public class StreakBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_streak_board);
 
-        mNoteDao = NoteRoomDatabase.getDatabase(getApplication()).noteDao();
+        mStreakDao = StreakRoomDatabase.getDatabase(getApplication()).streakDao();
 
-        setUpToolbar();
         handleIntent();
+        setUpToolbar();
         getList();
 
     }
@@ -63,67 +64,38 @@ public class StreakBoardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setUpToolbar() {
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Streak Board");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, StreakBoardActivity.class);
         return intent;
     }
 
-    /*Handle intent*/
+    /**
+     * Handle intent
+     */
     private void handleIntent() {
         if (getIntent() != null) {
         }
     }
 
-    private void initializeRecyclerView(ArrayList<NoteEntity> list) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext(), RecyclerView.VERTICAL, false);
-        mBinding.recyclerViewStreaks.setLayoutManager(layoutManager);
-        mBinding.recyclerViewStreaks.setAdapter(new StreakListAdapter(list));
+    private void setUpToolbar() {
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Streak Board");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
-//    private void getNotes() {
-//        new GetNotesAsyncTask(mNoteDao).execute();
-//    }
-
-//    private class GetNotesAsyncTask extends AsyncTask<Void, Void, Void> {
-//
-//        NoteDao mDao;
-//
-//        public GetNotesAsyncTask(NoteDao noteDao) {
-//            mDao = noteDao;
-//        }
-//
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//            if (mNoteEntityList != null && !mNoteEntityList.isEmpty()) {
-//                initializeRecyclerView(mNoteEntityList);
-//            }
-//        }
-//    }
-
+    /**
+     * Get streak list from database
+     */
     @SuppressLint("CheckResult")
     private void getList() {
 
-        Observable.create(new ObservableOnSubscribe<ArrayList<NoteEntity>>() {
+        Observable.create(new ObservableOnSubscribe<ArrayList<StreakEntity>>() {
             @Override
-            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<ArrayList<NoteEntity>> e) throws Exception {
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<ArrayList<StreakEntity>> e) throws Exception {
 
-                List<NoteEntity> list = mNoteDao.getAllNotes();
+                List<StreakEntity> list = mStreakDao.getAllStreaks();
                 if (list != null && !list.isEmpty()) {
-                    ArrayList<NoteEntity> entities = new ArrayList<>(list);
+                    ArrayList<StreakEntity> entities = new ArrayList<>(list);
                     e.onNext(entities);
                 } else {
                     e.onError(new Exception());
@@ -132,44 +104,51 @@ public class StreakBoardActivity extends AppCompatActivity {
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<ArrayList<NoteEntity>>() {
+                .subscribe(new Consumer<ArrayList<StreakEntity>>() {
                     @Override
-                    public void accept(ArrayList<NoteEntity> noteEntities) throws Exception {
-                        if (noteEntities != null && !noteEntities.isEmpty()) {
-                            mBinding.progressBar.setVisibility(View.GONE);
-                            mBinding.layoutRetry.setVisibility(View.GONE);
-                            mBinding.layoutNoResult.setVisibility(View.GONE);
-                            mBinding.layoutMain.setVisibility(View.VISIBLE);
-                            mNoteEntityList = noteEntities;
-                            initializeRecyclerView(mNoteEntityList);
-                        } else {
-                            noResultFound("You have not played yet");
-                        }
+                    public void accept(ArrayList<StreakEntity> noteEntities) throws Exception {
+
+                        mBinding.progressBar.setVisibility(View.GONE);
+                        mBinding.layoutRetry.setVisibility(View.GONE);
+                        mBinding.layoutNoResult.setVisibility(View.GONE);
+                        mBinding.layoutMain.setVisibility(View.VISIBLE);
+
+                        mStreakEntityList = noteEntities;
+                        initializeRecyclerView(mStreakEntityList);
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        noResultFound("Error");
+                        noResultFound();
                         throwable.printStackTrace();
                     }
                 });
 
     }
 
-    private void noResultFound(String message) {
+    private void initializeRecyclerView(ArrayList<StreakEntity> list) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext(), RecyclerView.VERTICAL, false);
+        mBinding.recyclerViewStreaks.setLayoutManager(layoutManager);
+        mBinding.recyclerViewStreaks.setAdapter(new StreakListAdapter(list));
+    }
+
+    private void noResultFound() {
+
         mBinding.layoutMain.setVisibility(View.GONE);
         mBinding.progressBar.setVisibility(View.GONE);
         mBinding.layoutRetry.setVisibility(View.GONE);
-
         mBinding.layoutNoResult.setVisibility(View.VISIBLE);
-        mBinding.textViewNoResult.setText(message);
+
+        mBinding.textViewNoResult.setText("You have to play to see streaks here :-)");
+
     }
 
-
+    //Adapter
     private class StreakListAdapter extends RecyclerView.Adapter<StreakListAdapter.ViewHolder> {
-        private ArrayList<NoteEntity> mList;
+        private ArrayList<StreakEntity> mList;
 
-        StreakListAdapter(ArrayList<NoteEntity> list) {
+        StreakListAdapter(ArrayList<StreakEntity> list) {
             mList = list;
         }
 
@@ -182,18 +161,22 @@ public class StreakBoardActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull StreakListAdapter.ViewHolder holder, int position) {
-            NoteEntity streakItem = mList.get(position);
+            StreakEntity streakItem = mList.get(position);
 
+            setBackgroundColor(position, holder.mBinding);
             setRanking(position, holder.mBinding.textViewRanking);
             setComputationalType(streakItem.getComputationType(), holder.mBinding.textViewComputationType);
             setStreakCount(streakItem.getStreak(), holder.mBinding.textViewStreak);
             setStreakRecordedDate(streakItem.getStreakRecordedDateInMillis(), holder.mBinding.textViewStreakRecordedDate);
-            if (position % 2 == 0) {
-                holder.mBinding.getRoot().setBackgroundColor(ContextCompat.getColor(getBaseContext(), android.R.color.white));
-            } else {
-                holder.mBinding.getRoot().setBackgroundColor(ContextCompat.getColor(getBaseContext(), android.R.color.holo_orange_light));
-            }
 
+        }
+
+        private void setBackgroundColor(int position, LayoutStreakListItemBinding binding) {
+            if (position % 2 == 0) {
+                binding.getRoot().setBackgroundColor(Color.parseColor("#E0F7FA"));
+            } else {
+                binding.getRoot().setBackgroundColor(ContextCompat.getColor(getBaseContext(), android.R.color.holo_orange_light));
+            }
         }
 
         private void setRanking(int position, AppCompatTextView textView) {
