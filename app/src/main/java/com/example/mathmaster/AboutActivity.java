@@ -10,23 +10,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AboutActivity extends AppCompatActivity {
 
-    Animation tAnim,bAnim;
+    Animation tAnim, bAnim;
     ImageView img;
-    TextView text1,text2;
+    TextView text1, text2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        tAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
-        bAnim= AnimationUtils.loadAnimation(this,R.anim.botm_anim);
+        tAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim);
+        bAnim = AnimationUtils.loadAnimation(this, R.anim.botm_anim);
 
-        img=findViewById(R.id.image1);
-        text1=findViewById(R.id.t1);
-        text2=findViewById(R.id.t2);
+        img = findViewById(R.id.image1);
+        text1 = findViewById(R.id.t1);
+        text2 = findViewById(R.id.t2);
 
         img.setAnimation(tAnim);
         text1.setAnimation(tAnim);
         text2.setAnimation(bAnim);
+
     }
+
 }

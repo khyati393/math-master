@@ -108,8 +108,6 @@ public class StreakBoardActivity extends AppCompatActivity {
                     @Override
                     public void accept(ArrayList<StreakEntity> noteEntities) throws Exception {
 
-                        mBinding.progressBar.setVisibility(View.GONE);
-                        mBinding.layoutRetry.setVisibility(View.GONE);
                         mBinding.layoutNoResult.setVisibility(View.GONE);
                         mBinding.layoutMain.setVisibility(View.VISIBLE);
 
@@ -134,14 +132,8 @@ public class StreakBoardActivity extends AppCompatActivity {
     }
 
     private void noResultFound() {
-
         mBinding.layoutMain.setVisibility(View.GONE);
-        mBinding.progressBar.setVisibility(View.GONE);
-        mBinding.layoutRetry.setVisibility(View.GONE);
         mBinding.layoutNoResult.setVisibility(View.VISIBLE);
-
-        mBinding.textViewNoResult.setText("You have to play to see streaks here :-)");
-
     }
 
     //Adapter

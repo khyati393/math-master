@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Math Master</string>
+    <string name="messagePlayToSeeStreaks">You have to play to see streaks here :-)</string>
 </resources>

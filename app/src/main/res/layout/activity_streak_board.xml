@@ -45,56 +45,8 @@
                 android:id="@+id/textViewNoResult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="string_no_results_found"
+                android:text="@string/messagePlayToSeeStreaks"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <!--Progress Bar-->
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <!--Retry-->
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layoutRetry"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageViewRetry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewRetry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonRetry"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="labelRetry"
-                android:textAllCaps="false" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
