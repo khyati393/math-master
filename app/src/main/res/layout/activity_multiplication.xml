@@ -5,18 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MultiplicationActivity"
-    android:background="@drawable/backgroundmult">
+    android:background="@drawable/chalkboard">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:layout_gravity="center">
 
         <TextView
             android:id="@+id/num1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="90dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="50dp"
             android:text=""
@@ -28,7 +29,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="50dp"
-            android:textColor="#7CC9EC"
+            android:textColor="#F3BE79"
             android:text="*"
             android:textSize="50dp" />
 
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="100dp"
-            android:background="#7CC9EC"
+            android:background="#F3BE79"
             android:fontFamily="cursive"
             android:text="True" />
 
@@ -70,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="100dp"
-            android:background="#7CC9EC"
+            android:background="#F3BE79"
             android:fontFamily="cursive"
             android:text="False" />
     </RelativeLayout>

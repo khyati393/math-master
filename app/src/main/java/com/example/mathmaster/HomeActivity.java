@@ -102,8 +102,11 @@ public class HomeActivity extends AppCompatActivity {
             }
             break;
 
-            case R.id.about:
-                Toast.makeText(this, "about clicked", Toast.LENGTH_SHORT).show();
+            case R.id.about:{
+                if (item.getItemId() == R.id.about)
+                    settings.about();
+                //Toast.makeText(this, "about clicked", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
 
