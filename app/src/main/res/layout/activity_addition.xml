@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_orange_light"
-                android:textSize="72dp"
+                android:textSize="72sp"
                 android:textStyle="bold"
                 tools:text="9" />
 
@@ -35,32 +35,51 @@
                 android:padding="32dp"
                 android:text="+"
                 android:textColor="@android:color/holo_orange_light"
-                android:textSize="72dp" />
+                android:textSize="72sp" />
 
             <TextView
                 android:id="@+id/num2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_orange_light"
-                android:textSize="72dp"
+                android:textSize="72sp"
                 android:textStyle="bold"
                 tools:text="5" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-            android:id="@+id/attempt"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@android:color/holo_orange_light"
-            android:textSize="80dp"
-            android:textStyle="bold"
-            tools:text="13" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:includeFontPadding="false"
+                android:text="="
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="72sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/attempt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="80sp"
+                android:textStyle="bold"
+                tools:text="13" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
@@ -73,7 +92,7 @@
                 android:fontFamily="cursive"
                 android:minWidth="96dp"
                 android:minHeight="96dp"
-                android:text="True" />
+                android:text="@string/labelTrue" />
 
             <Button
                 android:id="@+id/b2"
@@ -84,7 +103,7 @@
                 android:fontFamily="cursive"
                 android:minWidth="96dp"
                 android:minHeight="96dp"
-                android:text="False" />
+                android:text="@string/labelFalse" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

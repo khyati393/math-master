@@ -26,7 +26,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     AppCompatTextView spinner;
-    Settings settings = new Settings(getBaseContext());
+    Settings settings = new Settings(this);
     int positionList;
     Button button;
     private ActivityHomeBinding mBinding;
@@ -92,11 +92,11 @@ public class HomeActivity extends AppCompatActivity {
         switch (id) {
 
             case R.id.sound:
-                Toast.makeText(this, "sound clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "sound clicked", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.theme:
-                Toast.makeText(this, "theme clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "theme clicked", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.sharing: {
@@ -140,49 +140,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-
-//    private void userSelectionSpinnerSetup() {
-//
-//        // for drop down
-//        spinner = (AppCompatTextView) findViewById(R.id.spinner1);
-//
-//        final List<String> list = new ArrayList<String>();   //for drop down list
-//        list.add(0, "Choose");
-//        list.add("Addition");
-//        list.add("Subtraction");
-//        list.add("Multiplication");
-//        list.add("Division");
-//
-//
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spinner.setPrompt("Select your Choice");
-//        //Attaching data adapter to spinner
-//        spinner.setAdapter(arrayAdapter);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                spinner.setSelection(position);
-//                // spinner item text alignment center
-//                view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-//
-//                if (parent.getItemAtPosition(position).equals("Choose")) {
-//                    positionList = position;
-//                } else {
-////                    Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
-//                    positionList = position;
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//    }
 
     /*Branch*/
     private void showArithmeticChooseDropdown() {

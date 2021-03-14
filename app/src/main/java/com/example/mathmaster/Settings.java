@@ -16,7 +16,7 @@ public class Settings {
     }
 
     public void rate() {
-        Intent r = new Intent(mContext, RatingActivity.class);
+        Intent r = new Intent(mContext.getApplicationContext(), RatingActivity.class);
         mContext.startActivity(r);
     }
 
@@ -25,7 +25,7 @@ public class Settings {
         share.setType("text/plain");
         share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + "com.google.android.whatsapp");
         Intent.createChooser(share, "share app");
-        mContext.startActivity(Intent.createChooser(share, "Share us via"));
+        mContext.startActivity(Intent.createChooser(share, "Share 'Math Master' via"));
     }
 
     public void about() {

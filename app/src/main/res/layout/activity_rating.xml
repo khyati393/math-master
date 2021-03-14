@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RatingActivity"
-    android:orientation="vertical"
     android:background="@drawable/chalkboard"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".RatingActivity">
 
     <RatingBar
         android:id="@+id/rb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="0.5"/>
+        android:progressBackgroundTint="#938F91"
+        android:stepSize="0.5" />
 
     <Button
         android:id="@+id/RBB"
@@ -21,6 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="#F3BE79"
-        android:text="Rate Me"/>
+        android:text="Rate Me" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

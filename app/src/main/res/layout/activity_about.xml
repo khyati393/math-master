@@ -4,50 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/chalkboard"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".AboutActivity">
 
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:orientation="vertical"
-        android:paddingTop="200dp">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/image1"
             android:layout_width="175dp"
             android:layout_height="107dp"
-            android:layout_gravity="center"
             android:src="@drawable/playstore" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/t2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="#Guided by: @RAJAT JAIN"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            android:padding="16dp"
+            android:text="#Guidance: \n@Purvi Bhutalia"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/t1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingBottom="30dp"
-            android:text=" @KD "
-            android:textColor="#000000"
-            android:textSize="50dp" />
+            android:text="#Creation: \n@Khyati &amp; @Devika "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -10,6 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        archivesBaseName = "Math Master-$versionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -17,6 +18,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            initWith(buildTypes.debug)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

@@ -68,7 +68,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:background="#F3BE79"
-            android:padding="16dp"
+            android:paddingHorizontal="48dp"
+            android:paddingVertical="16dp"
             android:text="Play"
             android:textSize="20sp" />
 
@@ -77,10 +78,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="96dp"
             android:background="#F3BE79"
             android:padding="16dp"
             android:text="Streak Board"
+            android:textAllCaps="false"
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
