@@ -3,12 +3,12 @@ package com.example.mathmaster;
 import android.content.Context;
 import android.content.Intent;
 
-public class settings {
+public class Settings {
 
-    public Context context;
+    public Context mContext;
 
-    settings(Context context) {
-        this.context = context;
+    Settings(Context context) {
+        mContext = context;
     }
 
     public void sound() {
@@ -16,8 +16,8 @@ public class settings {
     }
 
     public void rate() {
-        Intent r = new Intent(context.getApplicationContext(), RatingActivity.class);
-        context.startActivity(r);
+        Intent r = new Intent(mContext, RatingActivity.class);
+        mContext.startActivity(r);
     }
 
     public void share() {
@@ -25,11 +25,11 @@ public class settings {
         share.setType("text/plain");
         share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + "com.google.android.whatsapp");
         Intent.createChooser(share, "share app");
-        context.startActivity(Intent.createChooser(share, "share using"));
+        mContext.startActivity(Intent.createChooser(share, "Share us via"));
     }
-    public void about()
-    {
-        Intent r1 = new Intent(context.getApplicationContext(), AboutActivity.class);
-        context.startActivity(r1);
+
+    public void about() {
+        Intent aboutUs = new Intent(mContext.getApplicationContext(), AboutActivity.class);
+        mContext.startActivity(aboutUs);
     }
 }

@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.mathmaster.databinding.ActivityHomeBinding;
@@ -25,8 +25,8 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    Spinner spinner;
-    settings settings = new settings(this);
+    AppCompatTextView spinner;
+    Settings settings = new Settings(getBaseContext());
     int positionList;
     Button button;
     private ActivityHomeBinding mBinding;
@@ -59,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setTitle("Really Exit ")
                 .setMessage("Are you sure ?")
+                .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -70,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                }).setCancelable(false);
+                });
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -110,12 +111,11 @@ public class HomeActivity extends AppCompatActivity {
             }
             break;
 
-            case R.id.about:{
+            case R.id.about: {
                 if (item.getItemId() == R.id.about)
                     settings.about();
-                //Toast.makeText(this, "about clicked", Toast.LENGTH_SHORT).show();
-                }
-                break;
+            }
+            break;
         }
 
         return true;
@@ -131,16 +131,63 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        userSelectionSpinnerSetup();
+        mBinding.autoTextArithmeticChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showArithmeticChooseDropdown();
+            }
+        });
+
 
     }
 
-    private void userSelectionSpinnerSetup() {
+//    private void userSelectionSpinnerSetup() {
+//
+//        // for drop down
+//        spinner = (AppCompatTextView) findViewById(R.id.spinner1);
+//
+//        final List<String> list = new ArrayList<String>();   //for drop down list
+//        list.add(0, "Choose");
+//        list.add("Addition");
+//        list.add("Subtraction");
+//        list.add("Multiplication");
+//        list.add("Division");
+//
+//
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        spinner.setPrompt("Select your Choice");
+//        //Attaching data adapter to spinner
+//        spinner.setAdapter(arrayAdapter);
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                spinner.setSelection(position);
+//                // spinner item text alignment center
+//                view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//
+//                if (parent.getItemAtPosition(position).equals("Choose")) {
+//                    positionList = position;
+//                } else {
+////                    Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
+//                    positionList = position;
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//    }
 
-        // for drop down
-        spinner = (Spinner) findViewById(R.id.spinner1);
+    /*Branch*/
+    private void showArithmeticChooseDropdown() {
 
-        final List<String> list = new ArrayList<String>();   //for drop down list
+        List<String> list = new ArrayList<String>();   //for drop down list
         list.add(0, "Choose");
         list.add("Addition");
         list.add("Subtraction");
@@ -148,34 +195,17 @@ public class HomeActivity extends AppCompatActivity {
         list.add("Division");
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter adapter = new ArrayAdapter<String>(getBaseContext(), R.layout.layout_only_textview, R.id.textView, list);
+        mBinding.autoTextArithmeticChoose.setAdapter(adapter);
 
-        spinner.setPrompt("Select your Choice");
-        //Attaching data adapter to spinner
-        spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mBinding.autoTextArithmeticChoose.showDropDown();
+
+        mBinding.autoTextArithmeticChoose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinner.setSelection(position);
-                // spinner item text alignment center
-                view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
-                if (parent.getItemAtPosition(position).equals("Choose")) {
-                    positionList = position;
-                } else {
-//                    Toast.makeText(getBaseContext(), "You Selected : " + list.get(position), Toast.LENGTH_SHORT).show();
-                    positionList = position;
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+                positionList = position;
             }
         });
-
     }
 
     public void nextPage() {
@@ -188,22 +218,22 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case 1:
-                Intent i1 = new Intent(getApplicationContext(), AdditionActivity.class);
+                Intent i1 = new Intent(getBaseContext(), AdditionActivity.class);
                 startActivity(i1);
                 break;
 
             case 2:
-                Intent i2 = new Intent(getApplicationContext(), SubtractionActivity.class);
+                Intent i2 = new Intent(getBaseContext(), SubtractionActivity.class);
                 startActivity(i2);
                 break;
 
             case 3:
-                Intent i3 = new Intent(getApplicationContext(), MultiplicationActivity.class);
+                Intent i3 = new Intent(getBaseContext(), MultiplicationActivity.class);
                 startActivity(i3);
                 break;
 
             case 4:
-                Intent i4 = new Intent(getApplicationContext(), DivisionActivity.class);
+                Intent i4 = new Intent(getBaseContext(), DivisionActivity.class);
                 startActivity(i4);
                 break;
 

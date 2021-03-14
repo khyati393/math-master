@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/sound"
-        android:title="sound"></item>
+        android:title="Sound" />
 
     <item
         android:id="@+id/theme"
-        android:title="theme"></item>
+        android:title="Theme" />
 
     <item
         android:id="@+id/sharing"
-        android:title="sharing"></item>
+        android:title="Share" />
 
     <item
         android:id="@+id/rating"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="2.5"
-        android:stepSize="0.5"
-        android:title="rating"
-        app:showAsAction="collapseActionView"></item>
+        android:title="Rate Us" />
 
     <item
         android:id="@+id/about"
-        android:title="about"></item>
+        android:title="About Us" />
 
 </menu>

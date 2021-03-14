@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -16,11 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:text="count"
-            android:textAllCaps="true"
+            android:text="COUNT"
             android:textColor="#450D08"
-            android:textSize="100dp" />
+            android:textSize="88dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/t2"
@@ -29,30 +28,37 @@
             android:gravity="center"
             android:text="in your mind"
             android:textColor="#3C0803"
-            android:textSize="50dp" />
-    </LinearLayout>
-    <LinearLayout
+            android:textSize="48dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#F3BE79">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/t3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="train"
-            android:textAllCaps="true"
-            android:textSize="100dp" />
+            android:text="TRAIN"
+            android:textColor="#FFF"
+            android:textSize="88dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/t4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="your brain"
             android:gravity="center"
-            android:textSize="50dp"
-            />
-    </LinearLayout>
+            android:text="your brain"
+            android:textColor="#FFF"
+            android:textSize="48dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

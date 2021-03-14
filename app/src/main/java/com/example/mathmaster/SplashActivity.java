@@ -10,22 +10,23 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 4000;  //4 SECOND
-    Animation tAnim,bAnim;
-    TextView text1,text2,text3,text4;
+
+    private static int SPLASH_TIME_OUT = 3000;  //4 SECOND
+    Animation tAnim, bAnim;
+    TextView text1, text2, text3, text4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        tAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
-        bAnim= AnimationUtils.loadAnimation(this,R.anim.botm_anim);
+        tAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim);
+        bAnim = AnimationUtils.loadAnimation(this, R.anim.botm_anim);
 
-        text1=findViewById(R.id.t1);
-        text2=findViewById(R.id.t2);
-        text3=findViewById(R.id.t3);
-        text4=findViewById(R.id.t4);
+        text1 = findViewById(R.id.t1);
+        text2 = findViewById(R.id.t2);
+        text3 = findViewById(R.id.t3);
+        text4 = findViewById(R.id.t4);
 
         text1.setAnimation(tAnim);
         text2.setAnimation(tAnim);

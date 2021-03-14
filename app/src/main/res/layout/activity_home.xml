@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bground"
@@ -11,49 +11,65 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#22000000"
+            android:fontFamily="serif"
             android:gravity="center"
             android:padding="6dp"
-            android:text="welcome"
-            android:fontFamily="serif"
-            android:textAllCaps="true"
+            android:text="WELCOME"
             android:textColor="#ffffff"
-            android:textSize="30sp"
+            android:textSize="48sp"
             android:textStyle="bold|italic" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:background="#22000000"
+            android:fontFamily="serif"
             android:gravity="center"
             android:padding="6dp"
             android:text="Math Master"
-            android:fontFamily="serif"
             android:textAllCaps="true"
             android:textColor="#ffffff"
             android:textSize="30sp"
             android:textStyle="bold|italic" />
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:popupBackground="#F3BE79"
+        <!--Choose-->
+        <AutoCompleteTextView
+            android:id="@+id/autoTextArithmeticChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp"
-            android:spinnerMode="dialog"
-            android:text="--Choose--"
-            android:textSize="20sp" />
+            android:layout_marginTop="48dp"
+            android:background="#F3BE79"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:drawableEnd="@drawable/icon_drop_down_arrow"
+            android:drawablePadding="16dp"
+            android:drawableTint="@android:color/black"
+            android:ellipsize="end"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="start"
+            android:inputType="textNoSuggestions"
+            android:longClickable="false"
+            android:maxLines="1"
+            android:minWidth="160dp"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:text="Choose"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
 
         <Button
             android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Play"
+            android:layout_marginTop="32dp"
             android:background="#F3BE79"
+            android:padding="16dp"
+            android:text="Play"
             android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -61,9 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
+            android:background="#F3BE79"
             android:padding="16dp"
-            android:text="Go To Streak Board"
+            android:text="Streak Board"
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
