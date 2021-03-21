@@ -3,11 +3,17 @@
 
     <item
         android:id="@+id/sound"
-        android:title="Sound" />
+        android:title="Sound"
+        android:visible="false" />
 
     <item
         android:id="@+id/theme"
-        android:title="Theme" />
+        android:title="Theme"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/streakBoard"
+        android:title="Streak Board" />
 
     <item
         android:id="@+id/sharing"

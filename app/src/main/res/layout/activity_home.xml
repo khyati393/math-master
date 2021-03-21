@@ -83,7 +83,8 @@
             android:padding="16dp"
             android:text="Streak Board"
             android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="gone" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

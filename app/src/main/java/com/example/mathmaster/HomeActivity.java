@@ -99,6 +99,10 @@ public class HomeActivity extends AppCompatActivity {
 //                Toast.makeText(this, "theme clicked", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.streakBoard:
+                startActivity(StreakBoardActivity.getStartIntent(getBaseContext()));
+                break;
+
             case R.id.sharing: {
                 if (item.getItemId() == R.id.sharing)
                     settings.share();
